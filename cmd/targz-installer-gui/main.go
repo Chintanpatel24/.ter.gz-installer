@@ -15,9 +15,9 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/open-source-labs/targz-installer/internal/commands"
-	"github.com/open-source-labs/targz-installer/internal/guiassets"
-	"github.com/open-source-labs/targz-installer/internal/installer"
+	"github.com/Chintanpatel24/.tar.gz-installer/internal/commands"
+	"github.com/Chintanpatel24/.tar.gz-installer/internal/guiassets"
+	"github.com/Chintanpatel24/.tar.gz-installer/internal/installer"
 )
 
 func main() {
