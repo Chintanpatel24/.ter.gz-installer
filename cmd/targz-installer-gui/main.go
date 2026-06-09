@@ -15,13 +15,18 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
+	"github.com/open-source-labs/targz-installer/internal/commands"
+	"github.com/open-source-labs/targz-installer/internal/guiassets"
 	"github.com/open-source-labs/targz-installer/internal/installer"
 )
 
-
 func main() {
+	if len(os.Args) > 1 {
+		os.Exit(commands.Run(os.Args[1:]))
+	}
+
 	gui := app.NewWithID("org.opensource.targz-installer")
-	gui.SetIcon(resourceLogo())
+	gui.SetIcon(guiassets.Logo())
 
 	window := gui.NewWindow("Tar.gz Installer")
 	window.Resize(fyne.NewSize(560, 360))
@@ -61,7 +66,8 @@ func main() {
 		picker.Show()
 	})
 
-	installButton := widget.NewButtonWithIcon("Install", theme.ConfirmIcon(), func() {
+	var installButton *widget.Button
+	installButton = widget.NewButtonWithIcon("Install", theme.ConfirmIcon(), func() {
 		lock.Lock()
 		selected := archivePath
 		lock.Unlock()
@@ -81,29 +87,29 @@ func main() {
 		installButton.Disable()
 		chooseButton.Disable()
 
-		go func() {
-			result, err := installer.Install(context.Background(), installer.Request{
-				ArchivePath: selected,
-				AppName:     nameInput.Text,
-				Scope:       scope,
-			})
-			fyne.Do(func() {
-				installButton.Enable()
-				chooseButton.Enable()
-				if err != nil {
-					status.SetText("Install failed.")
-					showError(window, err)
-					return
-				}
-				if result.AppName == "" {
-					status.SetText("Install finished.")
-					dialog.ShowInformation("Installed", "The application was installed.", window)
-					return
-				}
-				status.SetText("Installed " + result.AppName + ".")
-				dialog.ShowInformation("Installed", result.AppName+" is ready from your application menu.", window)
-			})
-		}()
+		result, err := installer.Install(context.Background(), installer.Request{
+			ArchivePath: selected,
+			AppName:     nameInput.Text,
+			Scope:       scope,
+		})
+		installButton.Enable()
+		chooseButton.Enable()
+		if err != nil {
+			status.SetText("Install failed.")
+			showError(window, err)
+			return
+		}
+		if result.AppName == "" {
+			status.SetText("Install finished.")
+			dialog.ShowInformation("Installed", "The application was installed.", window)
+			return
+		}
+		status.SetText("Installed " + result.AppName + ".")
+		message := result.AppName + " is ready from your application menu."
+		if result.Launches == "installed folder" {
+			message = result.AppName + " was installed. Its menu entry opens the installed folder because no executable file was found."
+		}
+		dialog.ShowInformation("Installed", message, window)
 	})
 	installButton.Importance = widget.HighImportance
 
@@ -161,12 +167,4 @@ func defaultName(path string) string {
 
 func showError(parent fyne.Window, err error) {
 	dialog.ShowError(err, parent)
-}
-
-func resourceLogo() fyne.Resource {
-	data, err := os.ReadFile("assets/logo.svg")
-	if err != nil {
-		return theme.ComputerIcon()
-	}
-	return fyne.NewStaticResource("targz-installer.svg", data)
 }
