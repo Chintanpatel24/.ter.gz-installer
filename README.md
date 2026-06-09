@@ -1,4 +1,8 @@
-# Tar.gz Installer
+<div align=center>
+<img width="180" src="assets/logo.svg" alt=".ter.gz.svg">
+</div>
+
+# .tar.gz Installer
 
 Tar.gz Installer is a small open source Linux app that installs `.tar.gz` application bundles from a clean GUI or a CLI.
 
