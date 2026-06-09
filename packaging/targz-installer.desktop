@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Tar.gz Installer
+Comment=Install Linux applications from .tar.gz archives
+Exec=targz-installer-gui
+Icon=targz-installer
+Terminal=false
+Categories=Utility;System;
+StartupNotify=true
+MimeType=application/gzip;application/x-gzip;application/x-tar;
