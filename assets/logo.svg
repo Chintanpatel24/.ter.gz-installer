@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Tar.gz Installer logo">
+  <rect width="512" height="512" rx="64" fill="#ffffff"/>
+  <rect x="88" y="76" width="336" height="364" rx="24" fill="#f4f4f5" stroke="#111111" stroke-width="16"/>
+  <path d="M336 76v96h88" fill="#ffffff" stroke="#111111" stroke-width="16" stroke-linejoin="round"/>
+  <text x="256" y="288" text-anchor="middle" dominant-baseline="middle" font-family="Inter, Arial, sans-serif" font-size="76" font-weight="800" fill="#111111">.tar.gz</text>
+</svg>
