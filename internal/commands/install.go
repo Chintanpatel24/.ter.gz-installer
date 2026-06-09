@@ -5,8 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
-
-	"github.com/open-source-labs/targz-installer/internal/installer"
+	"github.com/Chintanpatel24/.tar.gz-installer/internal/commands"
 )
 
 func Run(args []string) int {
