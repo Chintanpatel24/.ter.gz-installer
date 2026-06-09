@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	"github.com/open-source-labs/targz-installer/internal/commands"
+	"github.com/Chintanpatel24/.tar.gz-installer/internal/commands"
 )
 func main() {
 	os.Exit(commands.Run(os.Args[1:]))
