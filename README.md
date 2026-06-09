@@ -4,9 +4,8 @@
 
 # .tar.gz Installer
 
-Tar.gz Installer is a small open source Linux app that installs `.tar.gz` application bundles from a clean GUI or a CLI.
-
-The GUI opens from the desktop menu, accepts a dragged `.tar.gz` file, and installs it as a Linux application. The CLI provides the same installer behavior for terminal users.
+- Tar.gz Installer is a small open source Linux app that installs `.tar.gz` application bundles from a clean GUI or a CLI.
+- The GUI opens from the desktop menu, accepts a dragged `.tar.gz` file, and installs it as a Linux application. The CLI provides the same installer behavior for terminal users.
 
 ## What It Installs
 
@@ -16,6 +15,8 @@ The installer extracts a `.tar.gz` archive, looks for a runnable file such as `A
 - a launcher script
 - a `.desktop` menu entry
 - a local command symlink when possible
+
+If no executable is found, the archive is still installed. Its launcher opens the installed folder with `xdg-open` so the user can access the files without the installer guessing which file is safe to run.
 
 User installs do not need a password and go into `~/.local`. System installs use `pkexec` or `sudo` and may ask for your password.
 
